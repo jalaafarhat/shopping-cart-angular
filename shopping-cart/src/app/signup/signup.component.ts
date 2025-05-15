@@ -27,27 +27,23 @@ export class SignupComponent {
       ],
       confirmPassword: ['', Validators.required],
     });
-    // clear "user exists" error when email changes
-    this.signupForm.get('email')?.valueChanges.subscribe(() => {
-      this.errorMessage = '';
-    });
 
-    // trigger form revalidation when confirmPassword changes
-    this.signupForm.get('confirmPassword')?.valueChanges.subscribe(() => {
-      this.signupForm.updateValueAndValidity({ onlySelf: false });
+    this.signupForm.valueChanges.subscribe(() => {
+      const password = this.signupForm.get('password')?.value;
+      const confirm = this.signupForm.get('confirmPassword')?.value;
+      this.mismatchError = password && confirm && password !== confirm;
+
+      // Clear all errors when typing
+      this.errorMessage = '';
     });
   }
 
   onSubmit(): void {
     this.errorMessage = '';
 
-    if (this.signupForm.invalid) return;
+    if (this.signupForm.invalid || this.mismatchError) return;
 
-    const { email, password, confirmPassword } = this.signupForm.value;
-
-    if (password !== confirmPassword) {
-      return;
-    }
+    const { email, password } = this.signupForm.value;
 
     const users = JSON.parse(localStorage.getItem('users') || '[]');
     const exists = users.some((u: any) => u.email === email);
@@ -62,7 +58,6 @@ export class SignupComponent {
 
     this.successPopup = true;
 
-    // redirect after 2s
     setTimeout(() => {
       this.router.navigate(['/login']);
     }, 2000);
