@@ -1,0 +1,43 @@
+<h2>Sign Up</h2>
+
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+  <label>Email</label>
+  <input type="email" formControlName="email" />
+  <!-- This *ngif only work when the code inside returns true, so when i get that the email is invalid i will get the message "Valid email is required." -->
+  <div
+    *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched"
+  >
+    Valid email is required.
+  </div>
+
+  <label>Password</label>
+  <input type="password" formControlName="password" />
+  <div
+    *ngIf="
+      signupForm.get('password')?.invalid && signupForm.get('password')?.touched
+    "
+  >
+    Password must be at least 6 characters and contain 1 capital letter.
+  </div>
+
+  <label>Confirm Password</label>
+  <input type="password" formControlName="confirmPassword" />
+  <div *ngIf="mismatchError && signupForm.get('confirmPassword')?.touched">
+    Passwords do not match.
+  </div>
+
+  <div style="color: red; margin-top: 10px" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+
+  <button type="submit" [disabled]="signupForm.invalid">Sign Up</button>
+</form>
+
+<p>
+  Already have an account?
+  <a routerLink="/login">Login</a>
+</p>
+
+<div *ngIf="successPopup" class="popup">
+  Registration successful! Redirecting to login...
+</div>

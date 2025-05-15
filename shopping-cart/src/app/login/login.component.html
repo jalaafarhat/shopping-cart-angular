@@ -1,0 +1,47 @@
+<h2>Login</h2>
+
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <label>Email</label>
+  <input type="email" formControlName="email" />
+  <!-- This *ngif only work when the code inside returns true, so when i get that the email is invalid i will get the message "Valid email is required." -->
+  <div
+    *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+  >
+    Valid email is required.
+  </div>
+
+  <label>Password</label>
+  <input type="password" formControlName="password" />
+  <!-- Show "Password is required" ONLY when password is empty -->
+  <div
+    *ngIf="loginForm.get('password')?.errors?.['required'] && loginForm.get('password')?.touched"
+  >
+    Password is required.
+  </div>
+
+  <!-- Show generic error (wrong password) ONLY when it’s not required error -->
+  <div
+    *ngIf="
+    loginForm.get('password')?.invalid &&
+    !loginForm.get('password')?.errors?.['required'] &&
+    loginForm.get('password')?.touched
+  "
+  >
+    Wrong password!
+  </div>
+  <!-- Show server-side (logic) error like email not found or wrong password -->
+  <div style="color: red; margin-top: 10px" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+
+  <button type="submit" [disabled]="loginForm.invalid">Login</button>
+</form>
+
+<p>
+  Don't have an account?
+  <a routerLink="/signup">Sign Up</a>
+</p>
+
+<div *ngIf="successPopup" class="popup">
+  Login successful! Redirecting to Home Page...
+</div>
