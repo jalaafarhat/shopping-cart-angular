@@ -1,11 +1,10 @@
-<!-- 🔷 Page Header -->
 <header class="products-header">
   <h2>CowBoy Store - Products</h2>
   <nav class="nav-buttons">
     <button routerLink="/home" title="home">
       <img
         src="https://cdn-icons-png.flaticon.com/512/25/25694.png"
-        alt="Products"
+        alt="Home"
         class="icon-img"
       />
     </button>
@@ -26,7 +25,6 @@
   </nav>
 </header>
 
-<!-- 🔹 Layout Container -->
 <div class="products-layout">
   <!-- Sidebar Filter -->
   <aside class="filter-sidebar">
@@ -73,7 +71,7 @@
         <input
           type="number"
           min="1"
-          max="19"
+          max="20"
           [(ngModel)]="selectedQuantity[product.id]"
           class="quantity-input"
           placeholder="1"
@@ -84,7 +82,7 @@
             addToCart(
               product,
               selectedSize[product.id],
-              +selectedQuantity[product.id]
+              selectedQuantity[product.id]
             )
           "
         >

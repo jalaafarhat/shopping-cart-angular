@@ -1,1 +1,55 @@
-<p>cart works!</p>
+<header class="Cart-header">
+  <h2>CowBoy Store - Cart</h2>
+  <nav class="nav-buttons">
+    <button routerLink="/home" title="home">
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/25/25694.png"
+        alt="Home"
+        class="icon-img"
+      />
+    </button>
+    <button routerLink="/products" title="Products">
+      <img
+        src="https://static.thenounproject.com/png/524455-200.png"
+        alt="Products"
+        class="icon-img"
+      />
+    </button>
+    <button (click)="logout()" title="Logout">
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/126/126467.png"
+        alt="Logout"
+        class="icon-img"
+      />
+    </button>
+  </nav>
+</header>
+
+<div class="cart-grid" *ngIf="cartItems.length; else emptyCart">
+  <div class="cart-card" *ngFor="let item of cartItems; let i = index">
+    <img [src]="item.product.image" alt="item.name" class="cart-img" />
+    <div class="cart-details">
+      <h4>{{ item.product.name }}</h4>
+      <p>Size: {{ item.size }}</p>
+      <div class="quantity-control">
+        <button (click)="decrementQuantity(i)">−</button>
+        <span>{{ item.quantity }}</span>
+        <button (click)="incrementQuantity(i)">+</button>
+      </div>
+
+      <p>
+        <strong>Subtotal: {{ item.quantity * item.product.price }} ₪</strong>
+      </p>
+      <button (click)="removeItem(i)">Remove</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #emptyCart>
+  <p>Your cart is empty.</p>
+  <button routerLink="/products" title="Products">Choose Products</button>
+</ng-template>
+
+<div class="cart-total" *ngIf="cartItems.length">
+  <h3>Total: {{ total }} ₪</h3>
+</div>

@@ -115,6 +115,9 @@ export class ProductsComponent implements OnInit {
 
   shoeSizes = ['40', '41', '42', '43', '44', '45'];
   shirtSizes = ['S', 'M', 'L', 'XL'];
+
+  cartKey: string = '';
+
   constructor(private router: Router) {}
   ngOnInit(): void {
     this.filteredProducts = [...this.products];
@@ -150,22 +153,41 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  addToCart(product: Product, size: string, quantity: number = 1): void {
-    if (!size) return alert('Please select a size');
-    if (quantity < 1 || quantity > 20) return alert('Quantity must be 1–20');
-
-    const cart: CartItem[] = JSON.parse(localStorage.getItem('cart') || '[]');
-    const existing = cart.find(
-      (i) => i.product.id === product.id && i.size === size
-    );
-
-    if (existing) {
-      existing.quantity += quantity;
-    } else {
-      cart.push({ product, size, quantity });
+  addToCart(product: Product, size: string, quantity?: number): void {
+    const user = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
+    if (!user?.email) {
+      this.router.navigate(['/login']);
+      return;
     }
 
-    localStorage.setItem('cart', JSON.stringify(cart));
+    this.cartKey = `cart_${user.email}`;
+
+    if (!size) {
+      alert('Please select a size');
+      return;
+    }
+
+    const finalQuantity = Math.min(Math.max(quantity || 1, 1), 20);
+    const cart: CartItem[] = JSON.parse(
+      localStorage.getItem(this.cartKey) || '[]'
+    );
+
+    // Find existing item with BOTH product ID and size match
+    const existingItem = cart.find(
+      (item) => item.product.id === product.id && item.size === size
+    );
+
+    if (existingItem) {
+      existingItem.quantity += finalQuantity;
+    } else {
+      cart.push({
+        product: { ...product }, // Create copy to prevent reference issues
+        size: size,
+        quantity: finalQuantity,
+      });
+    }
+
+    localStorage.setItem(this.cartKey, JSON.stringify(cart));
     alert('Added to cart');
   }
 }
