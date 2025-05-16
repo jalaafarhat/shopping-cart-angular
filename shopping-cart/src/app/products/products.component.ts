@@ -93,7 +93,7 @@ export class ProductsComponent implements OnInit {
       name: 'Plaid Cowboy Shirt',
       type: 'shirts',
       price: 130,
-      sizes: ['S', 'M', 'L', 'XL'],
+      sizes: ['S', 'M', 'L', 'XL', 'XXL'],
       image: 'https://m.media-amazon.com/images/I/61IQH416KvL._AC_SL1200_.jpg',
     },
     {
@@ -114,7 +114,7 @@ export class ProductsComponent implements OnInit {
   selectedQuantity: { [key: number]: number } = {};
 
   shoeSizes = ['40', '41', '42', '43', '44', '45'];
-  shirtSizes = ['S', 'M', 'L', 'XL'];
+  shirtSizes = ['S', 'M', 'L', 'XL', 'XXL'];
 
   cartKey: string = '';
 
@@ -167,7 +167,14 @@ export class ProductsComponent implements OnInit {
       return;
     }
 
-    const finalQuantity = Math.min(Math.max(quantity || 1, 1), 20);
+    let finalQuantity = quantity ?? 1; // default to 1 if undefined
+
+    // Block if quantity is more than 20
+    if (finalQuantity > 20 || finalQuantity < 1) {
+      alert('Quantity must be 1-20!');
+      return;
+    }
+
     const cart: CartItem[] = JSON.parse(
       localStorage.getItem(this.cartKey) || '[]'
     );
