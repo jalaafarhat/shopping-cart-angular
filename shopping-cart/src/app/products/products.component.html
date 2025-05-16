@@ -1,1 +1,101 @@
-<p>products works!</p>
+<!-- 🔷 Page Header -->
+<header class="products-header">
+  <h2>CowBoy Store - Products</h2>
+  <nav class="nav-buttons">
+    <button routerLink="/home" title="home">
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/25/25694.png"
+        alt="Products"
+        class="icon-img"
+      />
+    </button>
+    <button routerLink="/cart" title="Cart">
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/3081/3081986.png"
+        alt="Cart"
+        class="icon-img"
+      />
+    </button>
+    <button (click)="logout()" title="Logout">
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/126/126467.png"
+        alt="Logout"
+        class="icon-img"
+      />
+    </button>
+  </nav>
+</header>
+
+<!-- 🔹 Layout Container -->
+<div class="products-layout">
+  <!-- Sidebar Filter -->
+  <aside class="filter-sidebar">
+    <h4>Filter by Type</h4>
+    <label
+      ><input type="checkbox" (change)="toggleType('shoes')" /> Shoes</label
+    >
+    <label
+      ><input type="checkbox" (change)="toggleType('shirts')" /> Shirts</label
+    >
+    <label><input type="checkbox" (change)="toggleType('hats')" /> Hats</label>
+
+    <div>
+      <h4>Filter By Shoe Size</h4>
+      <label *ngFor="let size of shoeSizes">
+        <input type="checkbox" (change)="toggleSize(size)" /> {{ size }}
+      </label>
+    </div>
+
+    <div>
+      <h4>Filter By Shirt Size</h4>
+      <label *ngFor="let size of shirtSizes">
+        <input type="checkbox" (change)="toggleSize(size)" /> {{ size }}
+      </label>
+    </div>
+  </aside>
+
+  <!-- Product Grid -->
+  <section class="product-grid">
+    <div class="product-card" *ngFor="let product of filteredProducts">
+      <img [src]="product.image" [alt]="product.name" class="product-img" />
+      <h4>{{ product.name }}</h4>
+      <p>{{ product.price }} ₪</p>
+
+      <div class="size-quantity-group">
+        <label for="size">Size:</label>
+        <select [(ngModel)]="selectedSize[product.id]">
+          <option *ngFor="let size of product.sizes" [value]="size">
+            {{ size }}
+          </option>
+        </select>
+
+        <label for="quantity">Quantity:</label>
+        <input
+          type="number"
+          min="1"
+          max="19"
+          [(ngModel)]="selectedQuantity[product.id]"
+          class="quantity-input"
+          placeholder="1"
+        />
+
+        <button
+          (click)="
+            addToCart(
+              product,
+              selectedSize[product.id],
+              +selectedQuantity[product.id]
+            )
+          "
+        >
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Footer Info -->
+<footer class="footer-info">
+  <p>CowBoy Store 2025 © All rights reserved.</p>
+</footer>

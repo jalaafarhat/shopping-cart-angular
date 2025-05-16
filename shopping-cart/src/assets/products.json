@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "name": "Cowboy Boots Brown",
+    "type": "shoes",
+    "price": 350,
+    "sizes": ["40", "41", "42", "43", "44", "45"],
+    "image": "https://www.ariat.com/dw/image/v2/AAML_PRD/on/demandware.static/-/Sites-ARIAT/default/dw99300076/images/warm/10042471_3-4_front_warm.jpg?sw=410&sh=410"
+  },
+  {
+    "id": 2,
+    "name": "Cowboy Boots Black",
+    "type": "shoes",
+    "price": 450,
+    "sizes": ["40", "41", "42", "43", "44", "45"],
+    "image": "https://capitanboots.com/cdn/shop/files/cmh24007d_houston_ps1_0424.jpg?v=1715183773"
+  },
+  {
+    "id": 3,
+    "name": "US Cowboy Boots",
+    "type": "shoes",
+    "price": 300,
+    "sizes": ["40", "41", "42", "43", "44", "45"],
+    "image": "https://i5.walmartimages.com/asr/96651955-9f5c-4c71-911b-69e97e5c6c17.2a81bb2ecd2d56e2fe80b1a6f8f7b742.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF"
+  },
+  {
+    "id": 4,
+    "name": "Cowboy Hat Brown",
+    "type": "hats",
+    "price": 120,
+    "sizes": ["M", "L", "XL"],
+    "image": "https://i.etsystatic.com/18153692/r/il/3f78bb/5802074775/il_570xN.5802074775_ea70.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Cowboy Hat Black",
+    "type": "hats",
+    "price": 70,
+    "sizes": ["M", "L", "XL"],
+    "image": "https://m.media-amazon.com/images/I/71UJVI08rrL._AC_UF350,350_QL80_.jpg"
+  },
+  {
+    "id": 6,
+    "name": "US Cowboy Hat",
+    "type": "hats",
+    "price": 150,
+    "sizes": ["M", "L", "XL"],
+    "image": "https://www.lindaanderson.com/cdn/shop/products/TX704-CowboyHAT-BB-2.jpg?v=1654619117"
+  },
+  {
+    "id": 7,
+    "name": "Plaid Cowboy Shirt",
+    "type": "shirts",
+    "price": 145,
+    "sizes": ["S", "M", "L", "XL"],
+    "image": "https://litb-cgis.rightinthebox.com/images//800x800//202406/bps/product/inc/drtmlq1718862233881.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Plaid Cowboy Shirt",
+    "type": "shirts",
+    "price": 130,
+    "sizes": ["S", "M", "L", "XL"],
+    "image": "https://m.media-amazon.com/images/I/61IQH416KvL._AC_SL1200_.jpg"
+  },
+  {
+    "id": 9,
+    "name": "Plaid Cowboy Shirt",
+    "type": "shirts",
+    "price": 175,
+    "sizes": ["S", "M", "L", "XL"],
+    "image": "https://images.halloweencostumes.ca/products/68054/2-1-179161/mens-western-shirt-alt-5.jpg"
+  }
+]

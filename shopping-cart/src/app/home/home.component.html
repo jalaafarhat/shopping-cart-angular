@@ -4,14 +4,14 @@
     <button routerLink="/products" title="Products">
       <img
         src="https://static.thenounproject.com/png/524455-200.png"
-        alt="Logout"
+        alt="Products"
         class="icon-img"
       />
     </button>
     <button routerLink="/cart" title="Cart">
       <img
         src="https://cdn-icons-png.flaticon.com/512/3081/3081986.png"
-        alt="Logout"
+        alt="Cart"
         class="icon-img"
       />
     </button>
@@ -24,6 +24,7 @@
     </button>
   </nav>
 </header>
+
 <div *ngIf="showAd" class="ad-popup">
   <div class="ad-content">
     <img
@@ -37,6 +38,24 @@
 
 <div class="scrolling-ad">
   <div class="scrolling-text">
-    🤠 CowBoy Store – when life gets tough, a cowboys get tougher 🤠
+    🤠 CowBoy Store – when life gets tough, a cowboy gets tougher 🤠
   </div>
 </div>
+
+<!-- Main Welcome Section -->
+<section class="home-banner">
+  <h2>🤠 Welcome to the Wild West of Fashion! 🤠</h2>
+  <img
+    src="https://media.istockphoto.com/id/1435271127/photo/country-music-festival-live-concert-with-acoustic-guitar-cowboy-hat-and-boots.jpg?s=612x612&w=0&k=20&c=9HIbcttJDYyYYixwY4721y8mATyEsbqKXxAdhgMPGT8="
+    alt="Country Festival"
+    class="welcome-img"
+  />
+  <button class="view-products-btn" routerLink="/products">
+    Show All Products
+  </button>
+</section>
+
+<!-- Footer Info -->
+<footer class="footer-info">
+  <p>CowBoy Store 2025 © All rights reserved.</p>
+</footer>

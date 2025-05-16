@@ -5,7 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
 import { CartComponent } from './cart/cart.component';
-import { authGuard } from './auth.guard';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {
@@ -24,17 +24,17 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [authGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'cart',
     component: CartComponent,
-    canActivate: [authGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'products',
     component: ProductsComponent,
-    canActivate: [authGuard], //You can only go to /home, /products, or /cart if you're logged in. otherwise you redirect to /login
+    canActivate: [AuthGuard], //You can only go to /home, /products, or /cart if you're logged in. otherwise you redirect to /login
   },
   { path: '**', redirectTo: 'login' }, //for wrong navigation go to /login
 ];

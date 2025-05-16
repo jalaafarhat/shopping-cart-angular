@@ -8,19 +8,29 @@ import { Router } from '@angular/router';
   styleUrl: './home.component.css',
 })
 export class HomeComponent {
-  showAd: boolean = true;
+  showAd: boolean = false;
+
   constructor(private router: Router) {
-    // Auto-close ad after 5 seconds if user doesn't click "Close"
-    setTimeout(() => {
-      this.showAd = false;
-    }, 5000);
+    const hasSeenAd = localStorage.getItem('hasSeenAd');
+
+    // Only show the ad if the user has NOT seen it in this session
+    if (!hasSeenAd) {
+      this.showAd = true;
+      localStorage.setItem('hasSeenAd', 'true'); // set this immediately
+      setTimeout(() => {
+        this.showAd = false;
+      }, 5000);
+    }
   }
 
   logout(): void {
     localStorage.removeItem('loggedInUser');
+    localStorage.removeItem('hasSeenAd'); // reset flag on logout
     this.router.navigate(['/login']);
   }
+
   closeAd(): void {
     this.showAd = false;
+    localStorage.setItem('hasSeenAd', 'true'); // ensure it's stored
   }
 }
