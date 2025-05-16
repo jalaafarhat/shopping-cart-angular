@@ -1,17 +1,33 @@
 import { TestBed } from '@angular/core/testing';
-import { CanActivateFn } from '@angular/router';
+import { Router } from '@angular/router';
+import { AuthGuard } from './auth.guard';
 
-import { authGuard } from './auth.guard';
-
-describe('authGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) => 
-      TestBed.runInInjectionContext(() => authGuard(...guardParameters));
+describe('AuthGuard', () => {
+  let guard: AuthGuard;
+  let routerSpy: jasmine.SpyObj<Router>;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+
+    TestBed.configureTestingModule({
+      providers: [AuthGuard, { provide: Router, useValue: routerSpy }],
+    });
+
+    guard = TestBed.inject(AuthGuard);
   });
 
-  it('should be created', () => {
-    expect(executeGuard).toBeTruthy();
+  it('should allow access if user is logged in', () => {
+    localStorage.setItem(
+      'loggedInUser',
+      JSON.stringify({ email: 'test@example.com' })
+    );
+    expect(guard.canActivate()).toBeTrue();
+  });
+
+  it('should deny access and redirect if user is not logged in', () => {
+    localStorage.removeItem('loggedInUser');
+    const result = guard.canActivate();
+    expect(result).toBeFalse();
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['/login']);
   });
 });
