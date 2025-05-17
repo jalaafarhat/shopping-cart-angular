@@ -120,7 +120,7 @@ export class ProductsComponent implements OnInit {
 
   constructor(private router: Router) {}
   ngOnInit(): void {
-    this.filteredProducts = [...this.products];
+    this.filteredProducts = [...this.products]; //creates a copy of this.products
   }
   logout(): void {
     localStorage.removeItem('loggedInUser');
@@ -169,7 +169,7 @@ export class ProductsComponent implements OnInit {
 
     let finalQuantity = quantity ?? 1; // default to 1 if undefined
 
-    // Block if quantity is more than 20
+    // Block if quantity is more than 20 or less than 1
     if (finalQuantity > 20 || finalQuantity < 1) {
       alert('Quantity must be 1-20!');
       return;
