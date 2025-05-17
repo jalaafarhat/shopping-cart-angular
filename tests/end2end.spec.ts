@@ -123,7 +123,6 @@ test("Invalid product size alert", async ({ page }) => {
   const firstProduct = page.locator(".product-card").nth(0);
   await firstProduct.locator('input[name="quantity"]').fill("1");
 
-  //Used AI after so much work to get this
   // Listen to the dialog before the click
   let alertShown = false;
   page.once("dialog", async (dialog) => {
@@ -166,7 +165,6 @@ test("Invalid quantity alert", async ({ page }) => {
   await firstProduct.locator("select").selectOption({ label: "40" });
   await firstProduct.locator('input[name="quantity"]').fill("0");
 
-  //Used AI after so much work to get this
   // Listen to the dialog before the click
   let alertShown = false;
   page.once("dialog", async (dialog) => {
