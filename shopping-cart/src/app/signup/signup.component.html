@@ -1,8 +1,8 @@
 <h2>Sign Up</h2>
 
-<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+<form name="signup" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
   <label>Email</label>
-  <input type="email" formControlName="email" />
+  <input name="email" type="email" formControlName="email" />
   <!-- This *ngif only work when the code inside returns true, so when i get that the email is invalid i will get the message "Valid email is required." -->
   <div
     *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched"
@@ -11,7 +11,7 @@
   </div>
 
   <label>Password</label>
-  <input type="password" formControlName="password" />
+  <input name="pass" type="password" formControlName="password" />
   <div
     *ngIf="
       signupForm.get('password')?.invalid && signupForm.get('password')?.touched
@@ -21,7 +21,7 @@
   </div>
 
   <label>Confirm Password</label>
-  <input type="password" formControlName="confirmPassword" />
+  <input name="cpass" type="password" formControlName="confirmPassword" />
   <div *ngIf="mismatchError && signupForm.get('confirmPassword')?.touched">
     Passwords do not match.
   </div>
@@ -30,7 +30,9 @@
     {{ errorMessage }}
   </div>
 
-  <button type="submit" [disabled]="signupForm.invalid">Sign Up</button>
+  <button name="signup" type="submit" [disabled]="signupForm.invalid">
+    Sign Up
+  </button>
 </form>
 
 <p>
