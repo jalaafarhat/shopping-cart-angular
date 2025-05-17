@@ -128,6 +128,7 @@ export class ProductsComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  // Filtering
   toggleType(type: string): void {
     const i = this.selectedTypes.indexOf(type);
     if (i === -1) this.selectedTypes.push(type);
@@ -153,6 +154,7 @@ export class ProductsComponent implements OnInit {
     });
   }
 
+  // Add to cart
   addToCart(product: Product, size: string, quantity?: number): void {
     const user = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
     if (!user?.email) {
@@ -160,7 +162,7 @@ export class ProductsComponent implements OnInit {
       return;
     }
 
-    this.cartKey = `cart_${user.email}`;
+    this.cartKey = `cart_${user.email}`; //unique cart for every user like the supermarket
 
     if (!size) {
       alert('Please select a size');
